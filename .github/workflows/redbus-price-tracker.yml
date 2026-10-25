@@ -50,6 +50,20 @@ jobs:
           CHROMEDRIVER_BIN: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: python redbus_to_csv.py
 
+      - name: Upload diagnostics if extraction fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redbus-diagnostics
+          path: |
+            redbus_no_results.png
+            redbus_page_title.txt
+            redbus_block_or_challenge.png
+            redbus_parse_failed.png
+            redbus_timeout.png
+          if-no-files-found: ignore
+          retention-days: 3
+
       - name: Commit CSV history
         if: success()
         run: |

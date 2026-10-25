@@ -1,0 +1,53 @@
+name: Bus fare tracker
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bus-fare-tracker
+  cancel-in-progress: false
+
+jobs:
+  track-fares:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch and record authorized fare data
+        env:
+          FARE_API_URL: ${{ vars.FARE_API_URL }}
+          FARE_API_TOKEN: ${{ secrets.FARE_API_TOKEN }}
+          FARE_API_TIMEOUT_SECONDS: '20'
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python tracker.py
+
+      - name: Commit fare history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if ! git diff --cached --quiet; then
+            git commit -m "Update bus fare history [skip ci]"
+            git push
+          else
+            echo "No data changes to commit."
+          fi

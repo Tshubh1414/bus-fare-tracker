@@ -1,0 +1,24 @@
+{
+  "buses": [
+    {
+      "id": "sample-001",
+      "operator_name": "Demo Travels A",
+      "bus_type": "AC Seater",
+      "departure_time": "08:30",
+      "arrival_time": "12:15",
+      "fare": 450,
+      "seats_available": 12,
+      "booking_url": "https://example.com/book/sample-001"
+    },
+    {
+      "id": "sample-002",
+      "operator_name": "Demo Travels B",
+      "bus_type": "AC Sleeper",
+      "departure_time": "22:15",
+      "arrival_time": "02:00",
+      "fare": 720,
+      "seats_available": 7,
+      "booking_url": "https://example.com/book/sample-002"
+    }
+  ]
+}

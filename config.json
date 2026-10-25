@@ -1,0 +1,22 @@
+{
+  "origin": "Pune",
+  "destination": "Mumbai",
+  "journey_date": "2026-10-30",
+  "target_price_inr": 500,
+  "query_params": {
+    "from": "{origin}",
+    "to": "{destination}",
+    "date": "{journey_date}"
+  },
+  "items_path": "buses",
+  "fields": {
+    "bus_id": "id",
+    "operator": "operator_name",
+    "bus_type": "bus_type",
+    "departure": "departure_time",
+    "arrival": "arrival_time",
+    "fare": "fare",
+    "seats_available": "seats_available",
+    "booking_url": "booking_url"
+  }
+}

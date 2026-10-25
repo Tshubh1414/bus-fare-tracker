@@ -27,9 +27,16 @@ jobs:
           python-version: '3.13'
 
       - name: Set up Chrome and ChromeDriver
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v2
         with:
+          chrome-version: stable
           install-chromedriver: true
+
+      - name: Verify Chrome and ChromeDriver versions
+        run: |
+          "${{ steps.setup-chrome.outputs.chrome-path }}" --version
+          "${{ steps.setup-chrome.outputs.chromedriver-path }}" --version
 
       - name: Install Python dependencies
         run: |
@@ -39,6 +46,8 @@ jobs:
       - name: Open search page and collect visible results
         env:
           HEADLESS: 'true'
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+          CHROMEDRIVER_BIN: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: python redbus_to_csv.py
 
       - name: Commit CSV history

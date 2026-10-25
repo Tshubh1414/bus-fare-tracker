@@ -20,6 +20,7 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 
 URL = (
@@ -196,6 +197,13 @@ def main() -> int:
     options = Options()
     if HEADLESS:
         options.add_argument("--headless=new")
+    # On GitHub Actions, use the exact Chrome/ChromeDriver paths provided by
+    # browser-actions/setup-chrome, rather than the runner's system Chrome.
+    chrome_bin = os.getenv("CHROME_BIN", "").strip()
+    chromedriver_bin = os.getenv("CHROMEDRIVER_BIN", "").strip()
+    if chrome_bin:
+        options.binary_location = chrome_bin
+
     options.add_argument("--window-size=1440,1000")
     options.add_argument("--disable-gpu")
     if sys.platform.startswith("linux"):
@@ -206,7 +214,12 @@ def main() -> int:
     print(f"Opening: {URL}")
     driver = None
     try:
-        driver = webdriver.Chrome(options=options)  # Selenium Manager locates driver
+        if chromedriver_bin:
+            driver = webdriver.Chrome(
+                service=Service(executable_path=chromedriver_bin), options=options
+            )
+        else:
+            driver = webdriver.Chrome(options=options)  # Selenium Manager for local use
         driver.set_page_load_timeout(60)
         driver.get(URL)
         WebDriverWait(driver, 35).until(

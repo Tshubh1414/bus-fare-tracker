@@ -2,11 +2,11 @@
   "sample-001": {
     "below_target": false,
     "last_fare_inr": 450.0,
-    "last_seen_utc": "2026-10-29T06:49:12+00:00"
+    "last_seen_utc": "2026-10-29T07:44:52+00:00"
   },
   "sample-002": {
     "below_target": false,
     "last_fare_inr": 720.0,
-    "last_seen_utc": "2026-10-29T06:49:12+00:00"
+    "last_seen_utc": "2026-10-29T07:44:52+00:00"
   }
 }

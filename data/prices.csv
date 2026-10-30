@@ -299,3 +299,5 @@ snapshot_utc,source,origin,destination,journey_date,bus_id,operator,bus_type,dep
 2026-10-30T10:45:33+00:00,sample,Pune,Mumbai,2026-10-30,sample-002,Demo Travels B,AC Sleeper,22:15,02:00,720.00,7,https://example.com/book/sample-002
 2026-10-30T11:20:41+00:00,sample,Pune,Mumbai,2026-10-30,sample-001,Demo Travels A,AC Seater,08:30,12:15,450.00,12,https://example.com/book/sample-001
 2026-10-30T11:20:41+00:00,sample,Pune,Mumbai,2026-10-30,sample-002,Demo Travels B,AC Sleeper,22:15,02:00,720.00,7,https://example.com/book/sample-002
+2026-10-30T12:02:33+00:00,sample,Pune,Mumbai,2026-10-30,sample-001,Demo Travels A,AC Seater,08:30,12:15,450.00,12,https://example.com/book/sample-001
+2026-10-30T12:02:33+00:00,sample,Pune,Mumbai,2026-10-30,sample-002,Demo Travels B,AC Sleeper,22:15,02:00,720.00,7,https://example.com/book/sample-002
